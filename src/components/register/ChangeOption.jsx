@@ -25,7 +25,7 @@ const StyledFormControlLabel = styled((props) => <FormControlLabel {...props} />
   ],
 }));
 
-export default function Option() {
+export default function ChangeOption() {
   const [selectedChange, setSelectedChange] = useState('1000');
 
   function MyFormControlLabel(props) {
