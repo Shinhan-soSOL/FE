@@ -1,6 +1,8 @@
-import MyButton from '../components/MyButton';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 function Landing() {
+  const navigate = useNavigate();
   return (
     <div className='w-full h-full relative'>
       <main className='w-full h-full flex flex-col justify-center items-center'>
@@ -12,7 +14,16 @@ function Landing() {
         </div>
         <img src='/images/landing_image.svg' width={246} height={246} />
       </main>
-      <MyButton title='시작하기' />
+      <footer className='absolute w-full px-6 left-0 right-0 bottom-3 flex justify-center'>
+        <Button
+          variant='contained'
+          disableElevation
+          className='w-full'
+          onClick={() => navigate('/register')}
+        >
+          시작하기
+        </Button>
+      </footer>
     </div>
   );
 }

@@ -6,11 +6,20 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 import theme from './theme.js';
 import Landing from './pages/Landing.jsx';
+import Register from './pages/Register.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <App />,
+  },
+  {
+    path: '/landing',
     element: <Landing />,
+  },
+  {
+    path: '/register',
+    element: <Register />,
   },
 ]);
 
