@@ -74,6 +74,19 @@ export default function StockOption() {
                 </div>
               </MenuItem>
             ))}
+            <MenuItem
+              key='000000'
+              value='자동 구매 안함'
+              className='w-full'
+              onClick={() => {
+                setStockCode('000000');
+              }}
+            >
+              <div className='flex flex-col'>
+                <ListItemText primary='자동 구매 안함' />
+                <div className='text-xs text-s-gray-100'>잔돈을 저축할게요</div>
+              </div>
+            </MenuItem>
           </Select>
         </FormControl>
       </main>
