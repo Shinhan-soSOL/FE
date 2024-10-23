@@ -47,7 +47,6 @@ export default function StockOption() {
             size='small'
             value={stockName}
             onChange={(event) => {
-              console.log(event);
               setStockName(event.target.value);
             }}
             renderValue={(selected) => {

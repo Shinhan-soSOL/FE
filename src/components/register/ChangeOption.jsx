@@ -35,10 +35,14 @@ export default function ChangeOption() {
 
     if (radioGroup) {
       checked = radioGroup.value === props.value;
-      if (radioGroup.value === props.value) {
+    }
+
+    useEffect(() => {
+      // radioGroup.value와 props.value가 일치할 때만 상태를 업데이트
+      if (checked) {
         setSelectedChange(props.value);
       }
-    }
+    }, [checked, props.value]);
 
     return <StyledFormControlLabel checked={checked} {...props} />;
   }
