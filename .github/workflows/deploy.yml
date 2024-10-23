@@ -1,0 +1,60 @@
+name: Deploy to EC2
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+            
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Build application
+        run: npm run build
+        
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.NHN_HOST }}
+          username: ${{ secrets.NHN_USER }}
+          key: ${{ secrets.NHN_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: '.'
+          target: '/home/ubuntu/frontend'
+          
+      - name: Execute remote commands via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.NHN_HOST }}
+          username: ${{ secrets.NHN_USER }}
+          key: ${{ secrets.NHN_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            sudo apt update
+            # Install Node.js and pm2 on Ubuntu
+            curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+            sudo apt-get install -y nodejs
+            sudo npm install -g pm2
+            
+            # Deploy application
+            npm install
+            npm run build
+            pm2 list | grep soSOL-FE && pm2 delete all || echo "No existing processes"
+            pm2 start "npm run preview" --name "soSOL-FE" --cwd "/home/ubuntu/frontend"
