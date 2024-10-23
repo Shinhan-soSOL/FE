@@ -4,12 +4,13 @@ import { Button } from '@mui/material';
 import SecurityAccount from '../components/register/SecurityAccount';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import ChangeOption from '../components/register/ChangeOption';
+import StockOption from '../components/register/StockOption';
 
 function Register() {
   const [currentRegister, setCurrentRegister] = useState(0);
   return (
-    <div className='w-full h-full  '>
-      <header className='w-full h-10 flex p-2'>
+    <div className='w-full h-full'>
+      <header className='fixed m-auto max-w-[320px] w-full h-10 flex p-2'>
         {currentRegister > 0 && (
           <BsArrowLeftShort
             size={32}
@@ -18,12 +19,14 @@ function Register() {
           />
         )}
       </header>
-      <main className='p-5'>
+      <main className='p-5 pt-10'>
         {currentRegister === 0 && <BankAccount />}
         {currentRegister === 1 && <SecurityAccount />}
         {currentRegister === 2 && (
-          <div className=' overflow-scroll'>
+          <div className='overflow-scroll'>
             <ChangeOption />
+            <div className='h-6'></div>
+            <StockOption />
           </div>
         )}
       </main>
