@@ -14,6 +14,9 @@ const theme = createTheme({
       // dark: will be calculated from palette.secondary.main,
       contrastText: '#47008F',
     },
+    gray: {
+      light: '#A2A2A2',
+    },
   },
   typography: {
     fontFamily: 'OneShinhanMedium, Arial',
