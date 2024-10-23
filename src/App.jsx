@@ -1,17 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Landing from './pages/Landing'
+import { useNavigate } from 'react-router-dom';
+import './App.css';
+import { useEffect } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const navigate = useNavigate();
 
-  return (
-    <>
-      <Landing />
-    </>
-  )
+  useEffect(() => {
+    navigate('/landing');
+  }, []);
+
+  return <div className='w-full h-full font-shinhan'></div>;
 }
 
-export default App
+export default App;
