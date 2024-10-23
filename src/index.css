@@ -2,22 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face{
-  font-family: "OneShinhanMedium";
-  src:local("OneShinhanMedium"),
-  url('./assets/fonts/OneShinhanMedium.ttf') 
+@font-face {
+  font-family: 'OneShinhanMedium';
+  src: local('OneShinhanMedium'), url('./assets/fonts/OneShinhanMedium.ttf');
 }
 
-@font-face{
-  font-family: "OneShinhanBold";
-  src:local("OneShinhanBold"),
-  url('./assets/fonts/OneShinhanBold.ttf') 
+@font-face {
+  font-family: 'OneShinhanBold';
+  src: local('OneShinhanBold'), url('./assets/fonts/OneShinhanBold.ttf');
 }
 
-@font-face{
-  font-family: "OneShinhanLight";
-  src:local("OneShinhanLight"),
-  url('./assets/fonts/OneShinhanLight.ttf') 
+@font-face {
+  font-family: 'OneShinhanLight';
+  src: local('OneShinhanLight'), url('./assets/fonts/OneShinhanLight.ttf');
+}
+
+#root {
+  width: 320px;
+  height: 100dvh;
+  overflow: auto;
+  margin: 0 auto;
+  scrollbar-width: none;
+  background-color: white;
+  @media (max-width: 320px) {
+    width: 100%;
+  }
+}
+
+body {
+  margin: 0;
 }
 
 /* :root {

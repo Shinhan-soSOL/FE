@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material'
+import { createTheme } from '@mui/material';
 
 const theme = createTheme({
   palette: {
@@ -17,7 +17,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: 'OneShinhanMedium, Arial',
-  }
+  },
 });
 
-export default theme
+export default theme;
