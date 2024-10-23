@@ -10,7 +10,7 @@ function Landing() {
         <div className=' font-shinhan-l pt-2'>잔돈을 모아 투자에 성공하세요!</div>
         <div className=' text-s-gray-100 font-shinhan-l py-6'>
           거래 후 생긴 잔돈을 모아 <br />
-          주식을 매수할 수 있습니다
+          주식을 구매합니다
         </div>
         <img src='/images/landing_image.svg' width={246} height={246} />
       </main>

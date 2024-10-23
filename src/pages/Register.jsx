@@ -18,7 +18,7 @@ function Register() {
           />
         )}
       </header>
-      <main className='pt-10 p-5'>
+      <main className='p-5'>
         {currentRegister === 0 && <BankAccount />}
         {currentRegister === 1 && <SecurityAccount />}
         {currentRegister === 2 && <Option />}
