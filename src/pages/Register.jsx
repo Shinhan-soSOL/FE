@@ -5,9 +5,12 @@ import SecurityAccount from '../components/register/SecurityAccount';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import ChangeOption from '../components/register/ChangeOption';
 import StockOption from '../components/register/StockOption';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const [currentRegister, setCurrentRegister] = useState(0);
+  const navigate = useNavigate();
+
   return (
     <div className='w-full h-full'>
       <header className='fixed m-auto max-w-[320px] w-full h-10 flex p-2'>
@@ -37,7 +40,7 @@ function Register() {
           className='w-full'
           onClick={() => {
             if (currentRegister < 2) setCurrentRegister((pre) => pre + 1);
-            else alert('홈으로 이동');
+            else navigate('/home');
           }}
         >
           {currentRegister < 2 ? '다음' : '완료'}
