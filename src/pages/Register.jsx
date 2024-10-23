@@ -13,7 +13,7 @@ function Register() {
         {currentRegister > 0 && (
           <BsArrowLeftShort
             size={32}
-            className=' text-s-gray-200'
+            className=' text-s-gray-300'
             onClick={() => setCurrentRegister((pre) => pre - 1)}
           />
         )}
