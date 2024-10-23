@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face{
+  font-family: "OneShinhanMedium";
+  src:local("OneShinhanMedium"),
+  url('./assets/fonts/OneShinhanMedium.ttf') 
+}
+
+@font-face{
+  font-family: "OneShinhanBold";
+  src:local("OneShinhanBold"),
+  url('./assets/fonts/OneShinhanBold.ttf') 
+}
+
+@font-face{
+  font-family: "OneShinhanLight";
+  src:local("OneShinhanLight"),
+  url('./assets/fonts/OneShinhanLight.ttf') 
+}
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

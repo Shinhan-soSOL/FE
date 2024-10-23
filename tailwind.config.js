@@ -6,6 +6,11 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'shinhan': ["OneShinhanMedium", "sans"],
+      'shinhan-b': ["OneShinhanBold"],
+      'shinhan-l': ["OneShinhanLight"],
+    },
   },
   plugins: [],
 }
