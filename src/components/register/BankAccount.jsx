@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 function BankAccount() {
   const [accountNumber, setAccountNumber] = useState();
-  const [selectedBank, setSelectedBank] = useState(0);
+  const [selectedBank, setSelectedBank] = useState('은행 선택');
 
   useEffect(() => {
     console.log('계좌번호', accountNumber);
@@ -35,12 +35,12 @@ function BankAccount() {
             value={selectedBank}
             onChange={(e) => setSelectedBank(e.target.value)}
           >
-            <MenuItem disabled value={0}>
+            <MenuItem disabled value='은행 선택'>
               <div className=' text-s-gray-100'>은행 선택</div>
             </MenuItem>
-            <MenuItem value={10}>신한</MenuItem>
-            <MenuItem value={20}>국민</MenuItem>
-            <MenuItem value={30}>농협</MenuItem>
+            <MenuItem value='신한'>신한</MenuItem>
+            <MenuItem value='국민'>국민</MenuItem>
+            <MenuItem value='농협'>농협</MenuItem>
           </Select>
         </FormControl>
       </div>

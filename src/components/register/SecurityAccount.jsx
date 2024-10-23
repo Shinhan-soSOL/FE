@@ -14,7 +14,7 @@ export default function SecurityAccount() {
       accountNumber: '100-0000-00000',
     },
   ]);
-  const [selectedAccount, setSelectedAccount] = useState();
+  const [selectedAccount, setSelectedAccount] = useState(accounts[0].accountNumber);
 
   useEffect(() => {
     console.log('증권 계좌', selectedAccount);
