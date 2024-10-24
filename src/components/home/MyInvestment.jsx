@@ -20,6 +20,7 @@ const colors = ['#5351DB', '#8151DB', '#51A6DB'];
 export default function MyInvestment({ data }) {
   const { totalValue, profitRatio, myStocks } = data;
   const [selectedStock, setSelectedStock] = useState(null);
+  const [selectedStockColor, setSelectedStockColor] = useState(null);
   const chartData = myStocks.map((item) => ({
     ...item,
     value: item.quantity,
@@ -37,8 +38,10 @@ export default function MyInvestment({ data }) {
   // };
 
   const [open, setOpen] = useState(false);
-  const handleOpenModal = (stock) => {
+  const handleOpenModal = (stock, idx) => {
+    console.log(stock);
     setSelectedStock(stock);
+    setSelectedStockColor(colors[idx]);
     setOpen(true);
   };
 
@@ -96,13 +99,13 @@ export default function MyInvestment({ data }) {
                 <TableRow
                   hover
                   key={stock.stockCode}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 }, fontSize: '100px' }}
                   onClick={() => {
-                    handleOpenModal(stock);
+                    handleOpenModal(stock, i);
                   }}
                 >
                   <TableCell>
-                    <div className='flex gap-2 items-center'>
+                    <div className='flex gap-3 items-center'>
                       <div style={{ backgroundColor: `${colors[i]}` }} className={`w-3 h-3`}></div>
                       {stock.stockName}
                     </div>
@@ -123,7 +126,7 @@ export default function MyInvestment({ data }) {
             }}
           >
             <div
-              className='max-w-[360px] w-[90%] p-4 bg-white rounded-lg shadow-sm'
+              className='flex flex-col gap-2 max-w-[360px] w-[90%] p-4 py-6 bg-white rounded-lg shadow-sm'
               style={{
                 position: 'absolute',
                 top: '50%',
@@ -131,7 +134,44 @@ export default function MyInvestment({ data }) {
                 transform: 'translate(-50%, -50%)',
               }}
             >
-              {selectedStock.stockName}
+              <div className=' text-lg font-bold'>{selectedStock.stockName}</div>
+              <hr className='pb-2'></hr>
+              <div className='flex justify-between items-center'>
+                <p className=' text-s-gray-100'>보유 수량</p>
+                <p className=' font-bold' style={{ color: `${selectedStockColor}` }}>
+                  {selectedStock.quantity}주
+                </p>
+              </div>
+              <div className='flex justify-between items-center'>
+                <p className=' text-s-gray-100'>투자 금액</p>
+                <p className=' font-bold text-s-gray-400'>
+                  {formatCurrency(selectedStock.investedAmount)}원
+                </p>
+              </div>
+              <div className='flex justify-between items-center'>
+                <p className=' text-s-gray-100'>수익</p>
+                {selectedStock.profit === 0 && (
+                  <p className=' font-bold text-s-gray-400'>
+                    {formatCurrency(selectedStock.profit)}원
+                  </p>
+                )}
+                {selectedStock.profit > 0 && (
+                  <p className=' font-bold text-ch-red'>
+                    +{formatCurrency(selectedStock.profit)}원
+                  </p>
+                )}
+                {selectedStock.profit < 0 && (
+                  <p className=' font-bold text-ch-blue'>
+                    -{formatCurrency(selectedStock.profit)}원
+                  </p>
+                )}
+              </div>
+              <div className='flex justify-between items-center'>
+                <p className=' text-s-gray-100'>총 금액</p>
+                <p className=' font-bold text-s-gray-400'>
+                  {formatCurrency(selectedStock.total)}원
+                </p>
+              </div>
             </div>
           </Modal>
         )}
