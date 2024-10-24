@@ -13,7 +13,7 @@ function Register() {
 
   return (
     <div className='w-full h-full'>
-      <header className='fixed m-auto max-w-[320px] w-full h-10 flex p-2'>
+      <header className='fixed m-auto max-w-[360px] w-full h-10 flex p-2'>
         {currentRegister > 0 && (
           <BsArrowLeftShort
             size={32}
@@ -36,8 +36,10 @@ function Register() {
       <footer className=' fixed w-full px-6 left-0 right-0 bottom-3 flex justify-center'>
         <Button
           variant='contained'
+          size='large'
           disableElevation
-          className='w-full'
+          className='w-full h-12'
+          sx={{ fontSize: '18px' }}
           onClick={() => {
             if (currentRegister < 2) setCurrentRegister((pre) => pre + 1);
             else navigate('/home');

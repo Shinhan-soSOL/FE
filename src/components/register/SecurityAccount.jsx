@@ -22,8 +22,10 @@ export default function SecurityAccount() {
 
   return (
     <div className='w-full'>
-      <div className='font-shinhan-b text-s-blue-800 py-6 pb-8'>어느 계좌에 잔돈을 채울까요?</div>
-      <ul className='flex flex-col gap-3'>
+      <div className='font-shinhan-b text-lg text-s-blue-800 py-6 pb-8'>
+        어느 계좌에 잔돈을 채울까요?
+      </div>
+      <ul className='flex flex-col gap-4'>
         {accounts.map((account) => {
           return (
             <li

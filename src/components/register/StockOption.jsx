@@ -33,8 +33,8 @@ export default function StockOption() {
   return (
     <div className='w-full'>
       <header>
-        <div className='font-shinhan-b text-s-blue-800 pt-6 pb-2 '>어떤 종목을 살까요?</div>
-        <div className='w-[205px] text-xs font-shinhan text-s-gray-100 pb-8'>
+        <div className='font-shinhan-b text-lg text-s-blue-800 pt-6 pb-2 '>어떤 종목을 살까요?</div>
+        <div className='font-shinhan text-s-gray-100 pb-8 break-keep'>
           해당 종목을 구매할 수 있을 만큼 잔돈이 모이면 자동으로 구매가 진행됩니다.
         </div>
       </header>
@@ -70,7 +70,7 @@ export default function StockOption() {
               >
                 <div className='flex flex-col'>
                   <ListItemText primary={stock.stockName} />
-                  <div className='text-xs text-s-gray-100'>{stock.currentPrice}원</div>
+                  <div className='text-sm text-s-gray-100'>{stock.currentPrice}원</div>
                 </div>
               </MenuItem>
             ))}
