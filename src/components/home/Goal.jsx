@@ -1,3 +1,4 @@
+import formatCurrency from '../../utils/formatCurrency';
 import Title from './Title';
 
 export default function Goal({ data }) {
@@ -8,7 +9,7 @@ export default function Goal({ data }) {
       <Title text='목표' />
       <div className='p-4'>
         <p className=' font-bold text-xl text-s-gray-400'>{stockName}</p>
-        <p className=' pt-1 font-extrabold text-3xl'>{currentPrice}원</p>
+        <p className=' pt-1 font-extrabold text-3xl'>{formatCurrency(currentPrice)}원</p>
       </div>
     </div>
   );

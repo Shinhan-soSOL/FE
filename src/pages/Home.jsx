@@ -19,7 +19,7 @@ export default function Home() {
       {
         stockName: '삼성전자',
         stockCode: '111111',
-        quantity: 3,
+        quantity: 10,
         investedAmount: 87000,
         profit: 13,
         total: 897000,
@@ -29,7 +29,7 @@ export default function Home() {
       },
       {
         stockName: 'LG전자',
-        stockCode: '111111',
+        stockCode: '222222',
         quantity: 2,
         investedAmount: 87000,
         profit: 13,
@@ -40,7 +40,7 @@ export default function Home() {
       },
       {
         stockName: '하이넥스',
-        stockCode: '111111',
+        stockCode: '333333',
         quantity: 1,
         investedAmount: 87000,
         profit: 13,

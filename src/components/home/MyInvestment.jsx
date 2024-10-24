@@ -3,48 +3,32 @@ import Title from './Title';
 import { PieChart } from '@mui/x-charts';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Paper from '@mui/material/Paper';
+import formatCurrency from '../../utils/formatCurrency';
 
 const colors = ['#5351DB', '#8151DB', '#51A6DB'];
 
 export default function MyInvestment({ data }) {
   const { totalValue, profitRatio, myStocks } = data;
 
-  // const items = [
-  //   {
-  //     data: myStocks[0],
-  //     value: 20,
-  //     label: '하이넥스',
-  //   },
-  //   { data: myStocks[1], value: myStocks, label: 'LG전자' },
-  //   { data: myStocks[2], value: 10, label: '삼성전자' },
-  // ];
-
-  const chartData = data.myStocks.map((item) => ({
+  const chartData = myStocks.map((item) => ({
     ...item,
     value: item.quantity,
     label: item.stockName,
   }));
 
-  const formatObject = (obj) => {
-    if (obj === null) {
-      return '  undefined';
-    }
-    return JSON.stringify(obj, null, 2)
-      .split('\n')
-      .map((l) => `  ${l}`)
-      .join('\n');
-  };
+  // const handleClick = (event, itemIdentifier, item) => {
+  //   console.log(itemIdentifier);
+  //   console.log(item.stockCode);
+  //   console.log(item.stockName);
+  //   console.log(item.quantity);
+  //   console.log(item.investedAmount);
+  //   console.log(item.profit);
+  //   console.log(item.total);
+  // };
 
-  const [identifier, setIdentifier] = useState(null);
-  const [id, setId] = useState(undefined);
-  const handleClick = (event, itemIdentifier, item) => {
-    setId(item.code);
-    setIdentifier(itemIdentifier);
+  const handleRowClick = (stock) => {
+    console.log(stock);
   };
-
-  function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-  }
 
   return (
     <div className='w-full p-4 px-5 bg-white'>
@@ -56,11 +40,10 @@ export default function MyInvestment({ data }) {
       />
       <header className='pt-4 flex flex-col justify-center items-center gap-1'>
         <p className=' text-sm text-s-gray-300'>총 보유 주식 자산</p>
-        <p className=' font-extrabold text-3xl'>{totalValue}원</p>
+        <p className=' font-extrabold text-3xl'>{formatCurrency(totalValue)}원</p>
         <p className=' '>수익률 {profitRatio}%</p>
       </header>
       <main className='py-4 w-full h-100'>
-        {/* <div>{`item id: ${id ?? 'undefined'} \n\nitem identifier:${formatObject(identifier)}`}</div> */}
         <div className='flex justify-center'>
           <PieChart
             series={[
@@ -72,7 +55,7 @@ export default function MyInvestment({ data }) {
               },
             ]}
             colors={colors}
-            onItemClick={handleClick}
+            // onItemClick={handleClick}
             width={180}
             height={220}
             margin={{ right: 0 }}
@@ -98,15 +81,22 @@ export default function MyInvestment({ data }) {
             </TableHead>
             <TableBody>
               {chartData.map((stock, i) => (
-                <TableRow key={stock.code}>
+                <TableRow
+                  hover
+                  key={stock.stockCode}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  onClick={() => {
+                    handleRowClick(stock);
+                  }}
+                >
                   <TableCell>
                     <div className='flex gap-2 items-center'>
                       <div style={{ backgroundColor: `${colors[i]}` }} className={`w-3 h-3`}></div>
                       {stock.stockName}
                     </div>
                   </TableCell>
-                  <TableCell align='right'>{stock.avgPrice}</TableCell>
-                  <TableCell align='right'>{stock.currentPrice}</TableCell>
+                  <TableCell align='right'>{formatCurrency(stock.avgPrice)}</TableCell>
+                  <TableCell align='right'>{formatCurrency(stock.currentPrice)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
