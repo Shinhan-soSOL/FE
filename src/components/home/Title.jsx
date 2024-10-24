@@ -1,6 +1,6 @@
 export default function Title({ text, onClick }) {
   return (
-    <div className='flex justify-between'>
+    <div className='flex justify-between items-center'>
       <div className='flex items-center gap-2'>
         <div className='text-lg font-shinhan-b'>{text}</div>
         {onClick && (
@@ -16,7 +16,7 @@ export default function Title({ text, onClick }) {
           </div>
         )}
       </div>
-      <div className='text-s-gray-300'>수정</div>
+      <div className=' font-sm text-s-gray-300'>수정</div>
     </div>
   );
 }

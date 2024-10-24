@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Goal from '../components/home/Goal';
+import MyChange from '../components/home/MyChange';
 
 export default function Home() {
   const [data, setData] = useState({
@@ -28,8 +29,9 @@ export default function Home() {
     ],
   });
   return (
-    <div className='w-full h-full bg-s-blue-50 flex flex-col gap-2'>
-      <Goal data={...data.goal} />
+    <div className='w-full h-full bg-s-blue-50 flex flex-col gap-2 overflow-y-scroll'>
+      <Goal data={data.goal} />
+      <MyChange data={data} />
     </div>
   );
 }

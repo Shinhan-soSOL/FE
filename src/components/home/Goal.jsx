@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Title from './Title';
 
 export default function Goal({ data }) {
@@ -9,7 +8,7 @@ export default function Goal({ data }) {
       <Title text='목표' />
       <div className='p-4'>
         <p className=' font-bold text-xl text-s-gray-400'>{stockName}</p>
-        <p className=' font-extrabold text-2xl'>{currentPrice}원</p>
+        <p className=' pt-1 font-extrabold text-3xl'>{currentPrice}원</p>
       </div>
     </div>
   );
