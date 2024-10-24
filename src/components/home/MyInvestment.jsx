@@ -4,7 +4,7 @@ import { PieChart } from '@mui/x-charts';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Paper from '@mui/material/Paper';
 
-const colors = ['#FF6384', '#36A2EB', '#FFCE56'];
+const colors = ['#5351DB', '#8151DB', '#51A6DB'];
 
 export default function MyInvestment({ data }) {
   const { totalValue, profitRatio, myStocks } = data;
@@ -54,24 +54,27 @@ export default function MyInvestment({ data }) {
           alert('히스토리 이동');
         }}
       />
-      <header className='p-4 flex flex-col justify-center items-center gap-1'>
+      <header className='pt-4 flex flex-col justify-center items-center gap-1'>
         <p className=' text-sm text-s-gray-300'>총 보유 주식 자산</p>
         <p className=' font-extrabold text-3xl'>{totalValue}원</p>
         <p className=' '>수익률 {profitRatio}%</p>
       </header>
       <main className='py-4 w-full h-100'>
-        <div>{`item id: ${id ?? 'undefined'} \n\nitem identifier:${formatObject(identifier)}`}</div>
+        {/* <div>{`item id: ${id ?? 'undefined'} \n\nitem identifier:${formatObject(identifier)}`}</div> */}
         <div className='flex justify-center'>
           <PieChart
             series={[
               {
+                paddingAngle: 3,
+                innerRadius: 50,
+                outerRadius: 100,
                 data: chartData,
               },
             ]}
             colors={colors}
             onItemClick={handleClick}
-            width={200}
-            height={300}
+            width={180}
+            height={220}
             margin={{ right: 0 }}
             legend={{ hidden: true }}
           />
@@ -82,13 +85,13 @@ export default function MyInvestment({ data }) {
           <Table stickyHeader>
             <TableHead>
               <TableRow>
-                <TableCell align='left' sx={{ color: '#4F4F4F' }}>
+                <TableCell align='left' sx={{ color: '#777777' }}>
                   종목명
                 </TableCell>
-                <TableCell align='right' sx={{ color: '#4F4F4F' }}>
+                <TableCell align='right' sx={{ color: '#777777' }}>
                   내 평균
                 </TableCell>
-                <TableCell align='right' sx={{ color: '#4F4F4F' }}>
+                <TableCell align='right' sx={{ color: '#777777' }}>
                   현재가
                 </TableCell>
               </TableRow>
