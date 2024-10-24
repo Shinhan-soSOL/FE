@@ -6,7 +6,7 @@ export default function MyChange({ data }) {
 
   return (
     <div className='w-full p-4 px-5 bg-white'>
-      <Title text='잔돈' />
+      <Title text='잔돈' hasEdit />
       <div className='p-4'>
         <p className=' font-extrabold text-3xl'>{formatCurrency(changeAmount)}원</p>
         <p className=' pt-1 text-s-gray-300'>

@@ -14,10 +14,12 @@ import {
 } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import formatCurrency from '../../utils/formatCurrency';
+import { useNavigate } from 'react-router-dom';
 
 const colors = ['#5351DB', '#8151DB', '#51A6DB'];
 
 export default function MyInvestment({ data }) {
+  const navigate = useNavigate();
   const { totalValue, profitRatio, myStocks } = data;
   const [selectedStock, setSelectedStock] = useState(null);
   const [selectedStockColor, setSelectedStockColor] = useState(null);
@@ -47,12 +49,7 @@ export default function MyInvestment({ data }) {
 
   return (
     <div className='w-full p-4 px-5 bg-white'>
-      <Title
-        text='내 투자'
-        onClick={() => {
-          alert('히스토리 이동');
-        }}
-      />
+      <Title text='내 투자' onClick={() => navigate('/investment/history')} hasEdit={false} />
       <header className='pt-4 flex flex-col justify-center items-center gap-1'>
         <p className=' text-sm text-s-gray-300'>총 보유 주식 자산</p>
         <p className=' font-extrabold text-3xl'>{formatCurrency(totalValue)}원</p>
