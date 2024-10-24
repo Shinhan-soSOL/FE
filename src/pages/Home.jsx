@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Goal from '../components/home/Goal';
 import MyChange from '../components/home/MyChange';
+import MyInvestment from '../components/home/MyInvestment';
 
 export default function Home() {
   const [data, setData] = useState({
@@ -18,7 +19,7 @@ export default function Home() {
       {
         stockName: '삼성전자',
         stockCode: '111111',
-        quantity: 2,
+        quantity: 3,
         investedAmount: 87000,
         profit: 13,
         total: 897000,
@@ -26,12 +27,35 @@ export default function Home() {
         profitRatio: 15.4,
         currentPrice: 56000,
       },
+      {
+        stockName: 'LG전자',
+        stockCode: '111111',
+        quantity: 2,
+        investedAmount: 87000,
+        profit: 13,
+        total: 897000,
+        avgPrice: 46000,
+        profitRatio: 15.4,
+        currentPrice: 50000,
+      },
+      {
+        stockName: '하이넥스',
+        stockCode: '111111',
+        quantity: 1,
+        investedAmount: 87000,
+        profit: 13,
+        total: 897000,
+        avgPrice: 46000,
+        profitRatio: 15.4,
+        currentPrice: 59000,
+      },
     ],
   });
   return (
     <div className='w-full h-full bg-s-blue-50 flex flex-col gap-2 overflow-y-scroll'>
       <Goal data={data.goal} />
       <MyChange data={data} />
+      <MyInvestment data={data} />
     </div>
   );
 }
