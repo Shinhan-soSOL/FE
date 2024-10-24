@@ -52,10 +52,16 @@ export default function Home() {
     ],
   });
   return (
-    <div className='w-full h-full bg-s-blue-50 flex flex-col gap-2 overflow-y-scroll'>
+    <div className='w-full h-full bg-s-blue-50 flex flex-col gap-2 py-2 overflow-y-scroll'>
       <Goal data={data.goal} />
       <MyChange data={data} />
       <MyInvestment data={data} />
+      <footer>
+        <div className='p-2 py-4 text-center text-s-gray-200'>
+          <p className='font-bold'>ⓒ SOSOL</p>
+          <p>김경륜, 김득호, 이원규, 임세현</p>
+        </div>
+      </footer>
     </div>
   );
 }
