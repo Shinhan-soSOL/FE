@@ -1,7 +1,17 @@
 import { useState } from 'react';
 import Title from './Title';
 import { PieChart } from '@mui/x-charts';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import {
+  Box,
+  Modal,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material';
 import Paper from '@mui/material/Paper';
 import formatCurrency from '../../utils/formatCurrency';
 
@@ -9,7 +19,7 @@ const colors = ['#5351DB', '#8151DB', '#51A6DB'];
 
 export default function MyInvestment({ data }) {
   const { totalValue, profitRatio, myStocks } = data;
-
+  const [selectedStock, setSelectedStock] = useState(null);
   const chartData = myStocks.map((item) => ({
     ...item,
     value: item.quantity,
@@ -26,8 +36,10 @@ export default function MyInvestment({ data }) {
   //   console.log(item.total);
   // };
 
-  const handleRowClick = (stock) => {
-    console.log(stock);
+  const [open, setOpen] = useState(false);
+  const handleOpenModal = (stock) => {
+    setSelectedStock(stock);
+    setOpen(true);
   };
 
   return (
@@ -86,7 +98,7 @@ export default function MyInvestment({ data }) {
                   key={stock.stockCode}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   onClick={() => {
-                    handleRowClick(stock);
+                    handleOpenModal(stock);
                   }}
                 >
                   <TableCell>
@@ -102,6 +114,27 @@ export default function MyInvestment({ data }) {
             </TableBody>
           </Table>
         </TableContainer>
+        {selectedStock && (
+          <Modal
+            open={open}
+            onClose={() => {
+              setSelectedStock(null);
+              setOpen(false);
+            }}
+          >
+            <div
+              className='max-w-[360px] w-[90%] p-4 bg-white rounded-lg shadow-sm'
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
+              {selectedStock.stockName}
+            </div>
+          </Modal>
+        )}
       </footer>
     </div>
   );
