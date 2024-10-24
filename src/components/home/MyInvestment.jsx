@@ -99,18 +99,44 @@ export default function MyInvestment({ data }) {
                 <TableRow
                   hover
                   key={stock.stockCode}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 }, fontSize: '100px' }}
+                  sx={{ border: 'none', '& td': { border: 'none' } }}
                   onClick={() => {
                     handleOpenModal(stock, i);
                   }}
                 >
-                  <TableCell>
+                  <TableCell sx={{ fontSize: '16px', paddingY: '28px' }}>
                     <div className='flex gap-3 items-center'>
                       <div style={{ backgroundColor: `${colors[i]}` }} className={`w-3 h-3`}></div>
                       {stock.stockName}
                     </div>
                   </TableCell>
-                  <TableCell align='right'>{formatCurrency(stock.avgPrice)}</TableCell>
+                  <TableCell
+                    align='right'
+                    sx={{
+                      color: `${
+                        stock.avgPrice - stock.currentPrice === 0
+                          ? '#4e4e4e '
+                          : stock.avgPrice - stock.currentPrice > 0
+                          ? '#FF5B5B'
+                          : '#5B9DFF'
+                      }}`,
+                    }}
+                  >
+                    <div className='font-lg' style={{ position: 'relative' }}>
+                      {formatCurrency(stock.avgPrice)}{' '}
+                      <p
+                        style={{
+                          position: 'absolute',
+                          top: '100%', // 가격 아래에 위치
+                          right: '0',
+                          fontSize: '12px',
+                        }}
+                      >
+                        ({stock.profitRatio > 0 && '+'}
+                        {`${formatCurrency(stock.profitRatio)}%`})
+                      </p>{' '}
+                    </div>
+                  </TableCell>
                   <TableCell align='right'>{formatCurrency(stock.currentPrice)}</TableCell>
                 </TableRow>
               ))}
