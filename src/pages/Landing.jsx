@@ -6,19 +6,21 @@ function Landing() {
   return (
     <div className='w-full h-full '>
       <main className='w-full h-full flex flex-col justify-center items-center'>
-        <div className=' font-shinhan-b text-2xl'>소SOL한 투자</div>
+        <div className=' font-shinhan-b text-3xl'>소SOL한 투자</div>
         <div className=' font-shinhan-l pt-2'>잔돈을 모아 투자에 성공하세요!</div>
-        <div className=' text-s-gray-100 font-shinhan-l py-6'>
-          거래 후 생긴 잔돈을 모아 <br />
-          주식을 구매합니다
+
+        <img src='/images/landing_image.svg' width={246} height={246} className='my-8' />
+        <div className=' text-s-gray-200 font-shinhan-l py-6'>
+          거래 후 생긴 잔돈을 모아 <br></br>주식을 구매할 수 있습니다
         </div>
-        <img src='/images/landing_image.svg' width={246} height={246} />
       </main>
-      <footer className='fixed w-full px-6 left-0 right-0 bottom-3 flex justify-center'>
+      <footer className='fixed max-w-[360px] px-6 w-full bottom-6'>
         <Button
           variant='contained'
+          size='large'
           disableElevation
-          className='w-full'
+          className='w-full h-12'
+          sx={{ fontSize: '18px' }}
           onClick={() => navigate('/register')}
         >
           시작하기
