@@ -24,13 +24,15 @@ export default function History() {
     });
   }, []);
 
-  function formatDate(dateString) {
-    const [year, month, day] = dateString.split('-');
+  function formatDate(dateTimeString) {
+    const [datePart, timePart] = dateTimeString.split(' ');
+    const [year, month, day] = datePart.split('-');
     return `${month}.${day}`;
   }
 
-  function formatTime(timeString) {
-    const [hour, minute] = timeString.split(':');
+  function formatTime(dateTimeString) {
+    const [datePart, timePart] = dateTimeString.split(' ');
+    const [hour, minute] = timePart.split(':');
     return `${hour}:${minute}`;
   }
 
