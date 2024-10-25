@@ -1,26 +1,17 @@
 import { FormControl, ListItemText, MenuItem, Select } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { getOptionPriceApi } from '../../apis/api';
 
 export default function StockOption() {
-  const [stocks, setStocks] = useState([
-    {
-      stockName: '삼성전자',
-      stockCode: '111111',
-      currentPrice: 56000,
-    },
-    {
-      stockName: 'LG전자',
-      stockCode: '111112',
-      currentPrice: 58000,
-    },
-    {
-      stockName: 'SK하이넥스',
-      stockCode: '111113',
-      currentPrice: 67000,
-    },
-  ]);
+  const [stocks, setStocks] = useState([]);
   const [stockName, setStockName] = useState('종목 선택');
   const [stockCode, setStockCode] = useState('-');
+
+  useEffect(() => {
+    getOptionPriceApi().then((res) => {
+      setStocks(res.stocks);
+    });
+  }, []);
 
   useEffect(() => {
     console.log('종목명', stockName);
@@ -59,6 +50,7 @@ export default function StockOption() {
             <MenuItem disabled value='종목 선택'>
               <div className='text-s-gray-100'>종목 선택</div>
             </MenuItem>
+            {stocks.length === 0 && <div className='p-4 text-s-gray-200'>Loading...</div>}
             {stocks.map((stock) => (
               <MenuItem
                 key={stock.stockCode}
