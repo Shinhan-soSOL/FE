@@ -10,41 +10,35 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import formatCurrency from '../utils/formatCurrency';
+import { getHistoryApi } from '../apis/api';
 
 export default function History() {
-  const [data, setData] = useState({
-    tradings: [
-      {
-        stockName: '삼성전자',
-        tradingDate: '2024-10-21',
-        tradingTime: '11:04',
-        tradingPrice: 1500,
-        changeAmount: 1450,
-        tradingQuantity: 1,
-      },
-      {
-        stockName: '삼성전자',
-        tradingDate: '2024-10-21',
-        tradingTime: '11:04',
-        tradingPrice: 1000,
-        changeAmount: 3050,
-        tradingQuantity: 1,
-      },
-    ],
-  });
+  const [tradings, setTradings] = useState([]);
   const navigate = useNavigate();
 
-  function formatDate(dateString) {
-    // '2024-10-24' -> '10.24'
-    const parts = dateString.split('-');
-    return `${parts[1]}.${parts[2]}`;
+  useEffect(() => {
+    getHistoryApi().then((res) => {
+      setTradings(res.tradings);
+    });
+  }, []);
+
+  function formatDate(dateTimeString) {
+    const [datePart, timePart] = dateTimeString.split(' ');
+    const [year, month, day] = datePart.split('-');
+    return `${month}.${day}`;
+  }
+
+  function formatTime(dateTimeString) {
+    const [datePart, timePart] = dateTimeString.split(' ');
+    const [hour, minute] = timePart.split(':');
+    return `${hour}:${minute}`;
   }
 
   return (
     <div className='w-full h-full'>
-      <header className='fixed m-auto max-w-[360px] w-full h-10 flex p-2'>
+      <header className='fixed m-auto max-w-[360px] w-full h-10 p-2 bg-white z-10'>
         <BsArrowLeftShort size={32} className=' text-s-gray-300' onClick={() => navigate(-1)} />
       </header>
       <main className='p-5 pt-10'>
@@ -70,7 +64,7 @@ export default function History() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.tradings.map((trading, i) => (
+              {tradings.map((trading, i) => (
                 <TableRow
                   hover
                   key={trading.stockCode}
@@ -78,20 +72,20 @@ export default function History() {
                 >
                   <TableCell>
                     <div className=' text-s-gray-400 opacity-80 font-bold'>
-                      {formatDate(trading.tradingDate)}
+                      {formatDate(trading.tradeDate)}
                     </div>
-                    <div className=' text-xs text-s-gray-100'>{trading.tradingTime}</div>
+                    <div className=' text-xs text-s-gray-100'>{formatTime(trading.tradeDate)}</div>
                   </TableCell>
                   <TableCell>
                     <div className='flex gap-3 items-center'>{trading.stockName}</div>
                   </TableCell>
                   <TableCell>
-                    <div className='flex gap-3 items-center'>{trading.tradingQuantity}주</div>
+                    <div className='flex gap-3 items-center'>{trading.tradeCount}주</div>
                   </TableCell>
                   <TableCell align='right'>
-                    <div>{formatCurrency(trading.tradingPrice)}원</div>
+                    <div>{formatCurrency(trading.tradePrice)}원</div>
                     <div className='text-xs text-s-gray-100'>
-                      {formatCurrency(trading.changeAmount)}원
+                      {formatCurrency(trading.resultChange)}원
                     </div>
                   </TableCell>
                 </TableRow>

@@ -117,8 +117,8 @@ export default function MyInvestment({ data }) {
                         stock.avgPrice - stock.currentPrice === 0
                           ? '#4e4e4e '
                           : stock.avgPrice - stock.currentPrice > 0
-                          ? '#FF5B5B'
-                          : '#5B9DFF'
+                          ? '#5B9DFF'
+                          : '#FF5B5B'
                       }}`,
                     }}
                   >
@@ -189,13 +189,13 @@ export default function MyInvestment({ data }) {
                   </p>
                 )}
                 {selectedStock.profit > 0 && (
-                  <p className=' font-bold text-ch-red'>
+                  <p className=' font-bold text-ch-red '>
                     +{formatCurrency(selectedStock.profit)}원
                   </p>
                 )}
                 {selectedStock.profit < 0 && (
-                  <p className=' font-bold text-ch-blue'>
-                    -{formatCurrency(selectedStock.profit)}원
+                  <p className=' font-bold text-ch-blue  '>
+                    {formatCurrency(selectedStock.profit)}원
                   </p>
                 )}
               </div>

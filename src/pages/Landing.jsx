@@ -14,7 +14,7 @@ function Landing() {
           거래 후 생긴 잔돈을 모아 <br></br>주식을 구매할 수 있습니다
         </div>
       </main>
-      <footer className='fixed max-w-[360px] px-6 w-full bottom-6'>
+      <footer className='fixed max-w-[360px] px-6 w-full bottom-8'>
         <Button
           variant='contained'
           size='large'

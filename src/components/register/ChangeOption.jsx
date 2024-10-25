@@ -2,7 +2,8 @@ import { styled } from '@mui/material/styles';
 import RadioGroup, { useRadioGroup } from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
-import { useEffect, useState } from 'react';
+import { useSetAtom } from 'jotai';
+import { accountRegisterAtom } from '../../storages/storage';
 
 const StyledFormControlLabel = styled((props) => <FormControlLabel {...props} />)(({ theme }) => ({
   variants: [
@@ -25,31 +26,25 @@ const StyledFormControlLabel = styled((props) => <FormControlLabel {...props} />
   ],
 }));
 
-export default function ChangeOption() {
-  const [selectedChange, setSelectedChange] = useState('1000');
-
-  function MyFormControlLabel(props) {
-    const radioGroup = useRadioGroup();
-
-    let checked = false;
-
-    if (radioGroup) {
-      checked = radioGroup.value === props.value;
-    }
-
-    useEffect(() => {
-      // radioGroup.value와 props.value가 일치할 때만 상태를 업데이트
-      if (checked) {
-        setSelectedChange(props.value);
-      }
-    }, [checked, props.value]);
-
-    return <StyledFormControlLabel checked={checked} {...props} />;
+function MyFormControlLabel(props) {
+  const radioGroup = useRadioGroup();
+  let checked = false;
+  if (radioGroup) {
+    checked = Number(radioGroup.value) === props.value;
   }
 
-  useEffect(() => {
-    console.log('잔돈 단위', selectedChange);
-  }, [selectedChange]);
+  return <StyledFormControlLabel checked={checked} {...props} />;
+}
+
+export default function ChangeOption() {
+  const setSelectedChange = useSetAtom(accountRegisterAtom);
+
+  function handleOptionChange(event) {
+    setSelectedChange((accountRegister) => ({
+      ...accountRegister,
+      changeRange: event.target.value,
+    }));
+  }
 
   return (
     <div className='w-full'>
@@ -65,9 +60,14 @@ export default function ChangeOption() {
         </div>
       </header>
       <main>
-        <RadioGroup name='use-radio-group' defaultValue='1000' sx={{ gap: '16px' }}>
-          <MyFormControlLabel value='1000' label='1000원 미만' control={<Radio size='small' />} />
-          <MyFormControlLabel value='100' label='100원 미만' control={<Radio size='small' />} />
+        <RadioGroup
+          name='use-radio-group'
+          defaultValue={1000}
+          sx={{ gap: '16px' }}
+          onChange={handleOptionChange}
+        >
+          <MyFormControlLabel value={1000} label='1000원 미만' control={<Radio size='small' />} />
+          <MyFormControlLabel value={100} label='100원 미만' control={<Radio size='small' />} />
         </RadioGroup>
       </main>
     </div>
