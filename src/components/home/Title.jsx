@@ -1,6 +1,6 @@
 import { IoIosArrowForward } from 'react-icons/io';
 
-export default function Title({ text, onClick }) {
+export default function Title({ text, onClick, hasEdit = false }) {
   return (
     <div className='flex justify-between items-center'>
       <div
@@ -12,7 +12,11 @@ export default function Title({ text, onClick }) {
         <div className='text-lg font-shinhan-b'>{text}</div>
         {onClick && <IoIosArrowForward size={20} className=' text-s-gray-300' />}
       </div>
-      {!onClick && <div className=' font-sm text-s-gray-300'>수정</div>}
+      {hasEdit && (
+        <div className=' font-sm text-s-gray-300' onClick={() => alert('준비중')}>
+          수정
+        </div>
+      )}
     </div>
   );
 }

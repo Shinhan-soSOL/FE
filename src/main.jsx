@@ -8,6 +8,7 @@ import theme from './theme.js';
 import Landing from './pages/Landing.jsx';
 import Register from './pages/Register.jsx';
 import Home from './pages/Home.jsx';
+import History from './pages/History.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <Home />,
+  },
+  {
+    path: '/investment/history',
+    element: <History />,
   },
 ]);
 
