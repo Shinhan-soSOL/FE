@@ -51,7 +51,11 @@ export async function getOptionPriceApi() {
 // 계좌 정보, 잔돈 조회
 export async function getChangeDataApi() {
   try {
-    const response = await axios.get('/change-data');
+    const response = await axios.get('/change-data', {
+      params: {
+        userId: 1,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);

@@ -10,7 +10,9 @@ export default function MyChange({ data }) {
       <div className='p-4'>
         <p className=' font-extrabold text-3xl'>{formatCurrency(changeAmount)}원</p>
         <p className=' pt-1 text-s-gray-300'>
-          목표까지 {formatCurrency(goal.currentPrice - changeAmount)}원 남았어요!
+          {goal.currentPrice - changeAmount < 0
+            ? `다음 장까지 기다려주세요`
+            : `목표까지 ${formatCurrency(goal.currentPrice - changeAmount)}원 남았어요!`}
         </p>
         <div className='w-full pt-5 text-s-blue-900 opacity-60 flex flex-col gap-1'>
           <div className='flex justify-between'>
