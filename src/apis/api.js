@@ -25,7 +25,7 @@ export async function postAccountsApi(data) {
 
   try {
     const response = await axios.post('/accounts', {
-      userId: userId,
+      userId: 4,
       bank: bank,
       security: security,
       changeRange: changeRange,

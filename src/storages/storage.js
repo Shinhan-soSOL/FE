@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 
 // 계좌, 매수 조건 등록
 export const accountRegisterAtom = atom({
-  userId: 1,
+  userId: null,
   bank: '',
   security: '',
   changeRange: 1000,

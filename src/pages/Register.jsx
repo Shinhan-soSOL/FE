@@ -9,22 +9,10 @@ import { useNavigate } from 'react-router-dom';
 import { postAccountsApi } from '../apis/api';
 import { useAtomValue } from 'jotai';
 import { accountRegisterAtom } from '../storages/storage';
+import LastOptions from '../components/register/LastOptions';
 
 function Register() {
   const [currentRegister, setCurrentRegister] = useState(0);
-  const registerData = useAtomValue(accountRegisterAtom);
-  const navigate = useNavigate();
-
-  function handleComplete() {
-    navigate('/home');
-    postAccountsApi(registerData)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }
 
   return (
     <div className='w-full h-full'>
@@ -37,18 +25,20 @@ function Register() {
           />
         )}
       </header>
-      <main className='p-5 pt-10'>
-        {currentRegister === 0 && <BankAccount />}
-        {currentRegister === 1 && <SecurityAccount />}
-        {currentRegister === 2 && (
+      {/* <main className='p-5 pt-10'> */}
+      <main>
+        {currentRegister === 0 && <BankAccount nextPage={setCurrentRegister} />}
+        {currentRegister === 1 && <SecurityAccount nextPage={setCurrentRegister} />}
+        {currentRegister === 2 && <LastOptions />}
+        {/* {currentRegister === 2 && (
           <div className='overflow-scroll'>
             <ChangeOption />
             <div className='h-6'></div>
             <StockOption />
           </div>
-        )}
+        )} */}
       </main>
-      <footer className='fixed max-w-[360px] px-6 w-full bottom-8'>
+      {/* <footer className='fixed max-w-[360px] px-6 w-full bottom-8'>
         <Button
           variant='contained'
           size='large'
@@ -62,7 +52,7 @@ function Register() {
         >
           {currentRegister < 2 ? '다음' : '완료'}
         </Button>
-      </footer>
+      </footer> */}
     </div>
   );
 }
