@@ -6,10 +6,25 @@ import { BsArrowLeftShort } from 'react-icons/bs';
 import ChangeOption from '../components/register/ChangeOption';
 import StockOption from '../components/register/StockOption';
 import { useNavigate } from 'react-router-dom';
+import { postAccountsApi } from '../apis/api';
+import { useAtomValue } from 'jotai';
+import { accountRegisterAtom } from '../storages/storage';
 
 function Register() {
   const [currentRegister, setCurrentRegister] = useState(0);
+  const registerData = useAtomValue(accountRegisterAtom);
   const navigate = useNavigate();
+
+  function handleComplete() {
+    navigate('/home');
+    postAccountsApi(registerData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
 
   return (
     <div className='w-full h-full'>
@@ -33,7 +48,7 @@ function Register() {
           </div>
         )}
       </main>
-      <footer className=' fixed w-full px-6 left-0 right-0 bottom-3 flex justify-center'>
+      <footer className='fixed max-w-[360px] px-6 w-full bottom-8'>
         <Button
           variant='contained'
           size='large'
@@ -42,7 +57,7 @@ function Register() {
           sx={{ fontSize: '18px' }}
           onClick={() => {
             if (currentRegister < 2) setCurrentRegister((pre) => pre + 1);
-            else navigate('/home');
+            else handleComplete();
           }}
         >
           {currentRegister < 2 ? '다음' : '완료'}

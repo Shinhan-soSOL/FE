@@ -12,10 +12,10 @@ export default function AccountCard({ companyName, accountName, accountNumber, s
       >
         {companyName}
       </div>
-      <div className={` opacity-60 ${selected ? 'text-s-blue-900' : 'text-s-gray-400'}`}>
+      <div className={`opacity-80 ${selected ? 'text-s-blue-900' : 'text-s-gray-400'}`}>
         {accountName}
       </div>
-      <div className={`opacity-50 pt-2 ${selected ? 'text-s-blue-900' : 'text-s-gray-400'}`}>
+      <div className={`text-lg pt-2 ${selected ? 'text-s-blue-900' : 'text-s-gray-400'}`}>
         {formatAccount(accountNumber)}
       </div>
     </div>

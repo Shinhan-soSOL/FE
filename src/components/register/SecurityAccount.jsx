@@ -1,17 +1,23 @@
 import { useEffect, useState } from 'react';
 import AccountCard from './AccountCard';
 import { getAccountsApi } from '../../apis/api';
+import { useAtom, useSetAtom } from 'jotai';
+import { accountRegisterAtom } from '../../storages/storage';
 
 export default function SecurityAccount() {
   const [accounts, setAccounts] = useState([]);
-  const [selectedAccount, setSelectedAccount] = useState();
+  const [accountNumber, setAccountNumber] = useAtom(accountRegisterAtom);
 
   useEffect(() => {
     const userId = 1;
     getAccountsApi(userId).then((res) => {
       setAccounts(res.secAccounts);
     });
-  }, [selectedAccount]);
+  }, []);
+
+  useEffect(() => {
+    console.log('atom', accountNumber);
+  }, [accountNumber]);
 
   return (
     <div className='w-full'>
@@ -24,10 +30,16 @@ export default function SecurityAccount() {
             <li
               key={account.accountNumber}
               onClick={() => {
-                setSelectedAccount(account.accountNumber);
+                setAccountNumber((accountRegister) => ({
+                  ...accountRegister,
+                  security: account.accountNumber,
+                }));
               }}
             >
-              <AccountCard {...account} selected={account.accountNumber === selectedAccount} />
+              <AccountCard
+                {...account}
+                selected={accountNumber.security === account.accountNumber}
+              />
             </li>
           );
         })}

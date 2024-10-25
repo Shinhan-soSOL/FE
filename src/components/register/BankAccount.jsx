@@ -1,17 +1,19 @@
-import { FormControl, MenuItem, Select, TextField } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Button, FormControl, MenuItem, Select, TextField } from '@mui/material';
+import { useAtom, useSetAtom } from 'jotai';
+import { useState } from 'react';
+import { accountRegisterAtom, bankNameAtom } from '../../storages/storage';
 
 function BankAccount() {
-  const [accountNumber, setAccountNumber] = useState();
-  const [selectedBank, setSelectedBank] = useState('은행 선택');
+  const [accountNumber, setAccountNumber] = useAtom(accountRegisterAtom);
+  const [selectedBank, setSelectedBank] = useAtom(bankNameAtom);
 
-  useEffect(() => {
-    console.log('계좌번호', accountNumber);
-  }, [accountNumber]);
+  // useEffect(() => {
+  //   console.log('계좌번호', accountNumber);
+  // }, [accountNumber]);
 
-  useEffect(() => {
-    console.log('은행', selectedBank);
-  }, [selectedBank]);
+  // useEffect(() => {
+  //   console.log('은행', selectedBank);
+  // }, [selectedBank]);
 
   return (
     <div>
@@ -22,7 +24,10 @@ function BankAccount() {
         <TextField
           variant='standard'
           placeholder='계좌 번호 입력'
-          onChange={(e) => setAccountNumber(e.target.value)}
+          value={accountNumber.bank}
+          onChange={(e) =>
+            setAccountNumber((accountRegister) => ({ ...accountRegister, bank: e.target.value }))
+          }
           autoFocus
         ></TextField>
         <FormControl variant='standard' fullWidth margin='normal'>
