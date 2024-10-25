@@ -9,7 +9,7 @@ function Register() {
 
   return (
     <div className='w-full h-full'>
-      <header className='fixed m-auto max-w-[360px] w-full h-10 flex p-2'>
+      <header className='fixed m-auto max-w-[360px] w-full h-10 p-2 bg-white z-10'>
         {currentRegister > 0 && (
           <BsArrowLeftShort
             size={32}

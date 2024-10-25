@@ -38,7 +38,7 @@ export default function History() {
 
   return (
     <div className='w-full h-full'>
-      <header className='fixed m-auto max-w-[360px] w-full h-10 flex p-2'>
+      <header className='fixed m-auto max-w-[360px] w-full h-10 p-2 bg-white z-10'>
         <BsArrowLeftShort size={32} className=' text-s-gray-300' onClick={() => navigate(-1)} />
       </header>
       <main className='p-5 pt-10'>
