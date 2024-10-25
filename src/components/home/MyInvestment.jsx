@@ -55,7 +55,7 @@ export default function MyInvestment({ data }) {
         <p className=' font-extrabold text-3xl'>{formatCurrency(totalValue)}원</p>
         <p className=' '>수익률 {profitRatio}%</p>
       </header>
-      <main className='py-4 w-full h-100'>
+      <main className='py-4 w-full'>
         <div className='flex justify-center'>
           <PieChart
             series={[
@@ -84,7 +84,7 @@ export default function MyInvestment({ data }) {
                   종목명
                 </TableCell>
                 <TableCell align='right' sx={{ color: '#777777' }}>
-                  내 평균
+                  평균 구매가
                 </TableCell>
                 <TableCell align='right' sx={{ color: '#777777' }}>
                   현재가
@@ -103,7 +103,10 @@ export default function MyInvestment({ data }) {
                 >
                   <TableCell sx={{ fontSize: '16px', paddingY: '28px' }}>
                     <div className='flex gap-3 items-center'>
-                      <div style={{ backgroundColor: `${colors[i]}` }} className={`w-3 h-3`}></div>
+                      <div
+                        style={{ backgroundColor: `${colors[i]}` }}
+                        className={`w-3 h-3 rounded-full`}
+                      ></div>
                       {stock.stockName}
                     </div>
                   </TableCell>
@@ -148,19 +151,26 @@ export default function MyInvestment({ data }) {
               setOpen(false);
             }}
           >
-            <div
-              className='flex flex-col gap-2 max-w-[360px] w-[90%] p-4 py-6 bg-white rounded-lg shadow-sm'
-              style={{
+            <Box
+              className='flex flex-col gap-2 max-w-[360px] w-[90%] px-8 py-8 bg-white rounded-lg shadow-sm'
+              sx={{
                 position: 'absolute',
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
+                outline: 'none',
               }}
             >
               <div className=' text-lg font-bold'>{selectedStock.stockName}</div>
               <hr className='pb-2'></hr>
               <div className='flex justify-between items-center'>
-                <p className=' text-s-gray-100'>보유 수량</p>
+                <p className='flex justify-center items-center gap-2 text-s-gray-100'>
+                  보유 수량
+                  <p
+                    style={{ backgroundColor: `${selectedStockColor}` }}
+                    className={`w-2 h-2 rounded-full`}
+                  ></p>
+                </p>
                 <p className=' font-bold' style={{ color: `${selectedStockColor}` }}>
                   {selectedStock.quantity}주
                 </p>
@@ -195,7 +205,7 @@ export default function MyInvestment({ data }) {
                   {formatCurrency(selectedStock.total)}원
                 </p>
               </div>
-            </div>
+            </Box>
           </Modal>
         )}
       </footer>
