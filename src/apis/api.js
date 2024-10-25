@@ -6,11 +6,11 @@ const axios = Axios.create({
 });
 
 // 계좌 목록 조회
-export async function getAccountsApi(id) {
+export async function getAccountsApi() {
   try {
     const response = await axios.get('/accounts', {
       params: {
-        id: id,
+        id: 1,
       },
     });
     return response.data;
@@ -42,6 +42,30 @@ export async function postAccountsApi(data) {
 export async function getOptionPriceApi() {
   try {
     const response = await axios.get('/option-price');
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// 계좌 정보, 잔돈 조회
+export async function getChangeDataApi() {
+  try {
+    const response = await axios.get('/change-data');
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// 히스토리 조회
+export async function getHistoryApi() {
+  try {
+    const response = await axios.get('/history', {
+      params: {
+        userId: 1,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);

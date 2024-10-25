@@ -10,8 +10,7 @@ export default function SecurityAccount({ nextPage }) {
   const [accountNumber, setAccountNumber] = useAtom(accountRegisterAtom);
 
   useEffect(() => {
-    const userId = 1;
-    getAccountsApi(userId).then((res) => {
+    getAccountsApi().then((res) => {
       setAccounts(res.secAccounts);
     });
   }, []);

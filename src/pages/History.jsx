@@ -10,36 +10,28 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import formatCurrency from '../utils/formatCurrency';
+import { getHistoryApi } from '../apis/api';
 
 export default function History() {
-  const [data, setData] = useState({
-    tradings: [
-      {
-        stockName: '삼성전자',
-        tradingDate: '2024-10-21',
-        tradingTime: '11:04',
-        tradingPrice: 1500,
-        changeAmount: 1450,
-        tradingQuantity: 1,
-      },
-      {
-        stockName: '삼성전자',
-        tradingDate: '2024-10-21',
-        tradingTime: '11:04',
-        tradingPrice: 1000,
-        changeAmount: 3050,
-        tradingQuantity: 1,
-      },
-    ],
-  });
+  const [tradings, setTradings] = useState([]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    getHistoryApi().then((res) => {
+      setTradings(res.tradings);
+    });
+  }, []);
+
   function formatDate(dateString) {
-    // '2024-10-24' -> '10.24'
-    const parts = dateString.split('-');
-    return `${parts[1]}.${parts[2]}`;
+    const [year, month, day] = dateString.split('-');
+    return `${month}.${day}`;
+  }
+
+  function formatTime(timeString) {
+    const [hour, minute] = timeString.split(':');
+    return `${hour}:${minute}`;
   }
 
   return (
@@ -70,7 +62,7 @@ export default function History() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.tradings.map((trading, i) => (
+              {tradings.map((trading, i) => (
                 <TableRow
                   hover
                   key={trading.stockCode}
@@ -78,20 +70,20 @@ export default function History() {
                 >
                   <TableCell>
                     <div className=' text-s-gray-400 opacity-80 font-bold'>
-                      {formatDate(trading.tradingDate)}
+                      {formatDate(trading.tradeDate)}
                     </div>
-                    <div className=' text-xs text-s-gray-100'>{trading.tradingTime}</div>
+                    <div className=' text-xs text-s-gray-100'>{formatTime(trading.tradeDate)}</div>
                   </TableCell>
                   <TableCell>
                     <div className='flex gap-3 items-center'>{trading.stockName}</div>
                   </TableCell>
                   <TableCell>
-                    <div className='flex gap-3 items-center'>{trading.tradingQuantity}주</div>
+                    <div className='flex gap-3 items-center'>{trading.tradeCount}주</div>
                   </TableCell>
                   <TableCell align='right'>
-                    <div>{formatCurrency(trading.tradingPrice)}원</div>
+                    <div>{formatCurrency(trading.tradePrice)}원</div>
                     <div className='text-xs text-s-gray-100'>
-                      {formatCurrency(trading.changeAmount)}원
+                      {formatCurrency(trading.resultChange)}원
                     </div>
                   </TableCell>
                 </TableRow>
