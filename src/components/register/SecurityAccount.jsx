@@ -1,23 +1,16 @@
 import { useEffect, useState } from 'react';
 import AccountCard from './AccountCard';
+import { getAccountsApi } from '../../apis/api';
 
 export default function SecurityAccount() {
-  const [accounts, setAccounts] = useState([
-    {
-      companyName: '신한투자증권',
-      accountName: '종합투자계좌',
-      accountNumber: '000-0000-00000',
-    },
-    {
-      companyName: '신한투자증권',
-      accountName: '종합투자계좌',
-      accountNumber: '100-0000-00000',
-    },
-  ]);
-  const [selectedAccount, setSelectedAccount] = useState(accounts[0].accountNumber);
+  const [accounts, setAccounts] = useState([]);
+  const [selectedAccount, setSelectedAccount] = useState();
 
   useEffect(() => {
-    console.log('증권 계좌', selectedAccount);
+    const userId = 1;
+    getAccountsApi(userId).then((res) => {
+      setAccounts(res.secAccounts);
+    });
   }, [selectedAccount]);
 
   return (
