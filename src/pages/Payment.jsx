@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Title from '../components/home/Title';
 import formatCurrency from '../utils/formatCurrency';
 import { Box, Button, Modal, TextField } from '@mui/material';
+import { getBalanceApi, postMakeMoneyApi } from '../apis/api';
 
 export default function Payment() {
   const [balances, setBalances] = useState({
@@ -13,11 +14,32 @@ export default function Payment() {
   const [tradePrice, setTradePrice] = useState('');
   const [open, setOpen] = useState(false);
   const [inputPw, setInputPw] = useState('');
+  const [errorPw, setErrorPw] = useState(false);
   const pwMaxLength = import.meta.env.VITE_PAY_PW.length;
 
   useEffect(() => {
-    // api 연결
+    getBalanceApi().then((res) => {
+      setBalances(res);
+    });
   }, []);
+
+  useEffect(() => {
+    if (inputPw.length === pwMaxLength) {
+      if (inputPw === import.meta.env.VITE_PAY_PW) {
+        postMakeMoneyApi(tradePrice)
+          .then(() => {
+            window.location.reload();
+          })
+          .catch((err) => {
+            alert(err);
+          });
+      } else {
+        setErrorPw(true);
+      }
+    } else {
+      setErrorPw(false);
+    }
+  }, [inputPw]);
 
   function handleClose() {
     setOpen(false);
@@ -55,7 +77,7 @@ export default function Payment() {
                   },
                 }}
                 inputProps={{
-                  style: { textAlign: 'right' }, // 여기서 오른쪽 정렬 적용
+                  style: { textAlign: 'right' },
                 }}
               />
               <Button
@@ -158,6 +180,8 @@ export default function Payment() {
                 </div>
                 <form onSubmit={(e) => e.preventDefault()} className='self-center'>
                   <TextField
+                    error={errorPw}
+                    helperText={errorPw ? '비밀번호가 일치하지 않습니다' : ''}
                     maxRows={4}
                     type='password'
                     variant='standard'
