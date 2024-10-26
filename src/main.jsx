@@ -9,6 +9,7 @@ import Landing from './pages/Landing.jsx';
 import Register from './pages/Register.jsx';
 import Home from './pages/Home.jsx';
 import History from './pages/History.jsx';
+import Payment from './pages/Payment.jsx';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: '/investment/history',
     element: <History />,
+  },
+  {
+    path: '/admin/payment',
+    element: <Payment />,
   },
 ]);
 
