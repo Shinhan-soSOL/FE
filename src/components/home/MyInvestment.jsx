@@ -83,7 +83,7 @@ export default function MyInvestment({ data }) {
                 <TableCell align='left' sx={{ color: '#777777' }}>
                   종목명
                 </TableCell>
-                <TableCell align='right' sx={{ color: '#777777' }}>
+                <TableCell align='right' sx={{ color: '#777777', wordBreak: 'keep-all' }}>
                   평균 구매가
                 </TableCell>
                 <TableCell align='right' sx={{ color: '#777777' }}>
