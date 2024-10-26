@@ -85,7 +85,16 @@ export default function Payment() {
                 size='small'
                 disableElevation
                 sx={{ fontSize: '14px' }}
-                onClick={() => setOpen(true)}
+                onClick={() => {
+                  if (!tradePrice || tradePrice === 0) {
+                    alert('금액을 입력해주세요');
+                  } else if (tradePrice > balances.bankBalance) {
+                    alert('잔액보다 적게 입력해주세요');
+                    setTradePrice('');
+                  } else {
+                    setOpen(true);
+                  }
+                }}
               >
                 결제
               </Button>
