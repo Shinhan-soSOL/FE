@@ -5,12 +5,7 @@ import { Box, Button, Modal, TextField } from '@mui/material';
 import { getBalanceApi, postMakeMoneyApi } from '../apis/api';
 
 export default function Payment() {
-  const [balances, setBalances] = useState({
-    bankBalance: 5000,
-    secBalance: 2000,
-    changeBalance: 750,
-    balanceSize: 1000,
-  });
+  const [balances, setBalances] = useState();
   const [tradePrice, setTradePrice] = useState('');
   const [open, setOpen] = useState(false);
   const [inputPw, setInputPw] = useState('');
