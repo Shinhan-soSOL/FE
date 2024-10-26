@@ -1,20 +1,28 @@
 import { useEffect, useState } from 'react';
 import Title from '../components/home/Title';
 import formatCurrency from '../utils/formatCurrency';
-import { Button, TextField } from '@mui/material';
+import { Box, Button, Modal, TextField } from '@mui/material';
 
 export default function Payment() {
   const [balances, setBalances] = useState({
     bankBalance: 5000,
     secBalance: 2000,
     changeBalance: 750,
-    changeOption: 1000,
+    balanceSize: 1000,
   });
-  const [tradePrice, setTradePrice] = useState();
+  const [tradePrice, setTradePrice] = useState('');
+  const [open, setOpen] = useState(false);
+  const [inputPw, setInputPw] = useState('');
+  const pwMaxLength = import.meta.env.VITE_PAY_PW.length;
 
   useEffect(() => {
     // api 연결
   }, []);
+
+  function handleClose() {
+    setOpen(false);
+    setInputPw('');
+  }
 
   return (
     <div className='w-full h-full bg-s-blue-50 flex flex-col gap-2 py-2 overflow-y-scroll'>
@@ -55,9 +63,7 @@ export default function Payment() {
                 size='small'
                 disableElevation
                 sx={{ fontSize: '14px' }}
-                onClick={() => {
-                  alert('결제');
-                }}
+                onClick={() => setOpen(true)}
               >
                 결제
               </Button>
@@ -70,7 +76,7 @@ export default function Payment() {
                     ? formatCurrency(
                         balances.bankBalance -
                           tradePrice -
-                          ((balances.bankBalance - tradePrice) % balances.changeOption)
+                          ((balances.bankBalance - tradePrice) % balances.balanceSize)
                       )
                     : formatCurrency(balances.bankBalance)}
                   원
@@ -82,7 +88,7 @@ export default function Payment() {
                   {tradePrice
                     ? formatCurrency(
                         balances.secBalance +
-                          ((balances.bankBalance - tradePrice) % balances.changeOption)
+                          ((balances.bankBalance - tradePrice) % balances.balanceSize)
                       )
                     : formatCurrency(balances.secBalance)}
                   원
@@ -94,7 +100,7 @@ export default function Payment() {
                   {tradePrice
                     ? formatCurrency(
                         balances.changeBalance +
-                          ((balances.bankBalance - tradePrice) % balances.changeOption)
+                          ((balances.bankBalance - tradePrice) % balances.balanceSize)
                       )
                     : formatCurrency(balances.changeBalance)}
                   원
@@ -118,6 +124,60 @@ export default function Payment() {
               </p>
             </div>
           </div>
+          <Modal
+            open={open}
+            onClose={(event, reason) => {
+              if (reason !== 'backdropClick') {
+                handleClose(); // 모달 밖을 클릭했을 때는 닫히지 않음
+              }
+            }}
+          >
+            <Box
+              className='flex flex-col gap-2 max-w-[360px] w-[90%] px-8 py-8 bg-white rounded-lg shadow-sm'
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                outline: 'none',
+              }}
+            >
+              <div className='flex flex-col gap-2'>
+                <div className='self-center font-shinhan'>비밀번호를 입력해주세요</div>
+                <div className='py-4 pb-8 flex justify-center items-center gap-2'>
+                  {Array.from([0, 0, 0, 0]).map((_, i) => {
+                    return (
+                      <div
+                        key={i}
+                        className={`w-3 h-3 rounded-full ${
+                          i + 1 <= inputPw.length ? ' bg-s-blue-500' : ' bg-s-gray-100'
+                        }`}
+                      ></div>
+                    );
+                  })}
+                </div>
+                <form onSubmit={(e) => e.preventDefault()} className='self-center'>
+                  <TextField
+                    maxRows={4}
+                    type='password'
+                    variant='standard'
+                    autoComplete='current-password'
+                    placeholder='비밀번호 입력'
+                    value={inputPw}
+                    onChange={(e) => {
+                      if (e.target.value.length <= pwMaxLength) {
+                        setInputPw(e.target.value);
+                      }
+                    }}
+                    sx={{ fontSize: '20px' }}
+                  />
+                </form>
+              </div>
+              <button className='text-sm pt-8 self-center text-s-gray-100' onClick={handleClose}>
+                취소
+              </button>
+            </Box>
+          </Modal>
         </>
       )}
     </div>
