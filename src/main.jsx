@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     element: <History />,
   },
   {
-    path: '/admin/payment',
+    path: '/payment',
     element: <Payment />,
   },
 ]);
