@@ -176,7 +176,7 @@ export default function Payment() {
               <div className='flex flex-col gap-2'>
                 <div className='self-center font-shinhan'>비밀번호를 입력해주세요</div>
                 <div className='py-4 pb-8 flex justify-center items-center gap-2'>
-                  {Array.from([0, 0, 0, 0]).map((_, i) => {
+                  {Array.from({ length: pwMaxLength }).map((_, i) => {
                     return (
                       <div
                         key={i}
@@ -191,7 +191,7 @@ export default function Payment() {
                   <TextField
                     error={errorPw}
                     helperText={errorPw ? '비밀번호가 일치하지 않습니다' : ''}
-                    maxRows={4}
+                    maxRows={pwMaxLength}
                     type='password'
                     variant='standard'
                     autoComplete='current-password'
