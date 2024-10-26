@@ -75,3 +75,37 @@ export async function getHistoryApi() {
     console.error(error);
   }
 }
+
+// 계좌잔액조회
+export async function getBalanceApi() {
+  try {
+    const response = await axios.get('/balance', {
+      params: {
+        userId: 1,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// 은행 잔돈 발생
+export async function postMakeMoneyApi(tradePrice) {
+  try {
+    const response = await axios.post(
+      '/make-money',
+      {
+        tradePrice: tradePrice,
+      },
+      {
+        params: {
+          id: 1,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}

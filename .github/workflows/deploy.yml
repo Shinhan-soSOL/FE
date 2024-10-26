@@ -9,12 +9,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-          
+
       - name: Cache node modules
         uses: actions/cache@v3
         with:
@@ -22,13 +22,13 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-            
+
       - name: Install dependencies
         run: npm install
-        
+
       - name: Build application
         run: npm run build
-        
+
       - name: Copy files via SSH
         uses: appleboy/scp-action@master
         with:
@@ -38,7 +38,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: '.'
           target: '/home/ubuntu/frontend'
-          
+
       - name: Execute remote commands via SSH
         uses: appleboy/ssh-action@master
         with:
@@ -52,8 +52,11 @@ jobs:
             curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
             sudo apt-get install -y nodejs
             sudo npm install -g pm2
-            
+
             # Deploy application
+            cd /home/ubuntu/frontend
+            touch .env
+            echo "${{ secrets.PROD_ENV_FILE }}" > .env
             npm install
             npm run build
             pm2 list | grep soSOL-FE && pm2 delete all || echo "No existing processes"
