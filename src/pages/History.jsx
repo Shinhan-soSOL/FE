@@ -79,8 +79,8 @@ export default function History() {
                   <TableCell>
                     <div className='flex gap-3 items-center'>{trading.stockName}</div>
                   </TableCell>
-                  <TableCell>
-                    <div className='flex gap-3 items-center'>{trading.tradeCount}주</div>
+                  <TableCell align='right'>
+                    <div>{trading.tradeCount}주</div>
                   </TableCell>
                   <TableCell align='right'>
                     <div>{formatCurrency(trading.tradePrice)}원</div>
