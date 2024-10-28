@@ -80,13 +80,33 @@ export default function MyInvestment({ data }) {
           <Table stickyHeader>
             <TableHead>
               <TableRow>
-                <TableCell align='left' sx={{ color: '#777777' }}>
+                <TableCell
+                  align='left'
+                  sx={{ fontSize: '14px', paddingX: '8px', color: '#777777' }}
+                >
                   종목명
                 </TableCell>
-                <TableCell align='right' sx={{ color: '#777777', wordBreak: 'keep-all' }}>
+                <TableCell
+                  align='right'
+                  sx={{ fontSize: '14px', paddingX: '8px', color: '#777777' }}
+                >
+                  수량
+                </TableCell>
+                <TableCell
+                  align='right'
+                  sx={{
+                    fontSize: '14px',
+                    color: '#777777',
+                    paddingX: '8px',
+                    wordBreak: 'keep-all',
+                  }}
+                >
                   평균 구매가
                 </TableCell>
-                <TableCell align='right' sx={{ color: '#777777' }}>
+                <TableCell
+                  align='right'
+                  sx={{ fontSize: '14px', paddingX: '8px', color: '#777777' }}
+                >
                   현재가
                 </TableCell>
               </TableRow>
@@ -101,18 +121,23 @@ export default function MyInvestment({ data }) {
                     handleOpenModal(stock, i);
                   }}
                 >
-                  <TableCell sx={{ fontSize: '16px', paddingY: '28px' }}>
-                    <div className='flex gap-3 items-center'>
+                  <TableCell sx={{ fontSize: '12px', paddingY: '28px' }}>
+                    <div className='flex gap-2 items-center'>
                       <div
                         style={{ backgroundColor: `${colors[i]}` }}
-                        className={`w-3 h-3 rounded-full`}
+                        className={`w-2 h-2 rounded-full`}
                       ></div>
                       {stock.stockName}
                     </div>
                   </TableCell>
+                  <TableCell sx={{ fontSize: '12px', paddingX: '8px' }} align='right'>
+                    {stock.quantity}주
+                  </TableCell>
                   <TableCell
                     align='right'
                     sx={{
+                      paddingX: '8px',
+                      fontSize: '12px',
                       color: `${
                         stock.avgPrice - stock.currentPrice === 0
                           ? '#4e4e4e '
@@ -123,7 +148,7 @@ export default function MyInvestment({ data }) {
                     }}
                   >
                     <div className='font-lg' style={{ position: 'relative' }}>
-                      {formatCurrency(stock.avgPrice)}{' '}
+                      {formatCurrency(stock.avgPrice)}
                       <p
                         style={{
                           position: 'absolute',
@@ -134,10 +159,12 @@ export default function MyInvestment({ data }) {
                       >
                         ({stock.profitRatio > 0 && '+'}
                         {`${formatCurrency(stock.profitRatio)}%`})
-                      </p>{' '}
+                      </p>
                     </div>
                   </TableCell>
-                  <TableCell align='right'>{formatCurrency(stock.currentPrice)}</TableCell>
+                  <TableCell sx={{ fontSize: '12px', paddingX: '8px' }} align='right'>
+                    {formatCurrency(stock.currentPrice)}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
