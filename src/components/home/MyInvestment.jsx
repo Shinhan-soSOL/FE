@@ -55,7 +55,7 @@ export default function MyInvestment({ data }) {
           ) : (
             <IoMdArrowDropdown size={20} />
           )}
-          <p>{formatCurrency(totalValue - investedAmount)}</p>
+          <p>{formatCurrency(totalValue - investedAmount)}원</p>
           <p className=''>({profitRatio}%)</p>
         </p>
       </header>
